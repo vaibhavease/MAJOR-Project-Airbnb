@@ -8,10 +8,16 @@ const listingSchema = new Schema({
     },
     description: String,
     image:{
-        type:"String",
+        filename:{
+            type: String},
+
+        url:{
+            type:String ,
+        
         default:"https://unsplash.com/photos/white-ceramic-plate-on-brown-wooden-table-8DlbPCxfGHA",
         set:(v) => v==="" ? "https://unsplash.com/photos/white-ceramic-plate-on-brown-wooden-table-8DlbPCxfGHA" : v,
     },
+},
     price: Number,
     location: String,
     country:String,
