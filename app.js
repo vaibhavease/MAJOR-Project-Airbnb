@@ -5,7 +5,8 @@ const Listings = require("./models/listings")
 const path = require("path");
 const methodOverride = require('method-override'); 
 const engine = require('ejs-mate'); 
-
+const wrapAsync = require("./utils/wrapsAsync");
+// const ExpressError = require("./utils/ExpressError.js");
 
 
 async function main(){
@@ -50,19 +51,15 @@ app.get("/listings/:id", async(req,res)=>{
 })
 
 //Create Route
-app.post("/listings", async(req,res)=> {
+app.post("/listings", wrapAsync(async(req,res,next)=> {
 
-try {
-    const listing = new Listings(req.body.listing); // req.body should include title
+    const listing = new Listings(req.body.listing); 
     await listing.save();
     res.redirect('/listings');
     console.log(req.body.listing)
-  } catch (err) {
-    console.error(err);
-    res.send('Validation error: ' + err.message);
-  }
+ 
 
-})
+}))
 
 //Edit Route
 app.get("/listings/:id/edit",async (req,res)=>{
@@ -88,6 +85,15 @@ app.delete("/listings/:id", async (req,res)=>{
     res.redirect("/listings");
     console.log(li)
 }) 
+
+
+// app.all("*",(req,res,next)=>{
+//     next(new ExpressError(404 , "Page Not Found!"))
+// })
+
+// app.use(( err, req ,res,next) => {
+//     let{statusCode, message }    = err;
+//     res.status(statusCode).send(message);})
 
 app.listen(8080, ()=>{
     console.log("listening to port 8080....")

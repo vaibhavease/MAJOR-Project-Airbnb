@@ -3,72 +3,71 @@
 
     <div class="row mt-3">
         <div class="col-8 offset-2">
-
-     <br><br>
+        <br><br>
  
-    <h2>Create New Listing</h2>
+        <h2>Create New Listing</h2>
 
-    <form action="/listings" method="post">
+            <form action="/listings" method="post" novalidate class="needs-validation" >
 
-        <div class="mb-3">
-        <label for="title" class = "" >Title</label>
+                <div class="mb-3">
+                     <label for="title" class = "" >Title</label>
+                     <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control w-100" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
 
-        <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control w-100">
-        </div>
+                 </div>
      
+                 <div class="mb-3">
+                        <label class="" for="description">Description</label>
+                        <textarea name="listing[description]" id="" placeholder="add description" class="form-control w-100" required
+                        
+                        
+
+                        >
+                            
+                        </textarea>
+                 </div>
+
+                 <div class="mb-3">
+                         <label for="image" class="">Image</label>
+                         <input type="text" name="listing[image]" id="" placeholder="add image link" class="form-control w-100">
+                 </div>
 
 
-        <div class="mb-3">
-               <label class="" for="description">Description</label>
-             <textarea name="listing[description]" id="" placeholder="add description" class="form-control w-100"></textarea>
-          
-        </div>
+         <div class="row">
+                <div class="mb-3 col-md-4">
+                         <label for="price" class="">Price</label>
+                        <input            name="listing[price]" placeholder="1200" class="form-control w-100" required>
+                            <div class="invalid-feedback">
+                                Price should be valid.
+                            </div>
+               </div>
 
-
-       
-        
-
-        <div class="mb-3">
-            <label for="image" class="">Image</label>
-            <input type="text" name="listing[image]" id="" placeholder="add image link" class="form-control w-100">
-                
-        </div>
-       
-        <div class="row">
-
-              <div class="mb-3 col-md-4">
-            <label for="price" class="">Price</label>
-            <input type="number"  name="listing[price]" placeholder="1200" class="form-control w-100">
-        </div>
-
-         <div class="mb-3 col-md-8">
-            <label for="country" class="">Country</label>
-             <input type="text" name="listing[country]" placeholder="India" class="form-control w-100">
-        </div>
-       
-
-        
-
-
+                <div class="mb-3 col-md-8">
+                        <label for="country" class="">Country</label>
+                        <input type="text" name="listing[country]" placeholder="India" class="form-control w-100" required>
+                             <div class="invalid-feedback">
+                               Country should be valid .
+                            </div>
+                 </div>
         </div>
         
       
-        
-
-
-
         <div class="mb-5">
             <label for="location" class="">Location</label>
-            <input type="text" name="listing[location]" placeholder="Bandra,Mumbai" class="form-control w-100">
+            <input type="text" name="listing[location]" placeholder="Bandra,Mumbai" class="form-control w-100" required>
+                   <div class="invalid-feedback">
+                               Location should be valid .
+                     </div>
         </div>
         
        
 
        
-        <button class="btn btn-dark mt-3 add-btn">Add New Listing</button>
-        <br> <br> <br>
-    </form>
-</body>
-  </div>
-
-  </div>
+                    <button class="btn btn-dark mt-3 add-btn">Add New Listing</button>
+                <br> <br> <br>
+        </form>
+    </body>
+</div>
+</div>
