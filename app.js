@@ -8,6 +8,7 @@ const engine = require('ejs-mate');
 const wrapAsync = require("./utils/wrapsAsync");
 // const ExpressError = require("./utils/ExpressError.js");
 const Review = require("./models/review")
+const {listingSchema} = require("./schema")
 
 
 
@@ -54,13 +55,15 @@ app.get("/listings/:id", async(req,res)=>{
 
 //Create Route
 app.post("/listings", wrapAsync(async(req,res,next)=> {
-
+  let result =  listingSchema.validate(req.body)
+  console.log(result);
+    // if(listing.error){
+    //     throw ExpressError(404, result.error)
+    // }
     const listing = new Listings(req.body.listing); 
     await listing.save();
     res.redirect('/listings');
     console.log(req.body.listing)
- 
-
 }))
 
 //Edit Route
