@@ -8,7 +8,8 @@ const engine = require('ejs-mate');
 const wrapAsync = require("./utils/wrapsAsync");
 // const ExpressError = require("./utils/ExpressError.js");
 const Review = require("./models/review")
-const {listingSchema} = require("./schema")
+// const {listingSchema} = require("./schema")
+// const {reviewSchema} = require("./schema") 
 
 
 
@@ -49,7 +50,7 @@ app.get("/listings/new",(req,res)=>{
 //Show route
 app.get("/listings/:id", async(req,res)=>{
     let {id} = req.params ;
-    const listing = await Listings.findById(id);
+    const listing = await Listings.findById(id).populate('reviews');
     res.render("listings/show.ejs", {listing})
 })
 
@@ -106,6 +107,14 @@ app.post("/listings/:id/reviews", async(req, res)=>{
    await listing.save();
 
    res.redirect(`/listings/${listing._id}`)
+})
+
+//Delete route for reviews
+app.delete("/listings/:id/reviews/:reviewId", async(req, res)=>{
+    let {id, reviewId} = req.params;
+    await Listings.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
 })
 
 // app.all("*",(req,res,next)=>{
